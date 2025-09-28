@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+import os, shutil, subprocess
+
+TOP_N = 15
+REPORT_FILE = "/tmp/largest_files_report.txt"
+
+def check_disk_usage(): os.system("df -h")
+def show_top_largest_files():
+    cmd=f"find / -type f -printf '%s %p\\n' 2>/dev/null | sort -nr | head -n {TOP_N}"
+    output=subprocess.getoutput(cmd)
+    print(output)
+    with open(REPORT_FILE,'w') as f: f.write(output)
+    print(f"Report saved to {REPORT_FILE}")
+def cleanup_apt_cache(): os.system("sudo apt-get clean && sudo apt-get autoclean")
+def remove_unused_packages(): os.system("sudo apt-get autoremove --purge -y")
+def empty_trash(): os.system("rm -rf ~/.local/share/Trash/*")
+def cleanup_thumbnails(): os.system("rm -rf ~/.cache/thumbnails/*")
+def cleanup_journal_logs(): os.system("sudo journalctl --rotate && sudo journalctl --vacuum-time=1d")
+def system_summary(): os.system("uname -a && uptime && free -h && df -h")
+def backup_home(): shutil.make_archive("home_backup",'gztar',os.path.expanduser("~")); print("Backup complete: home_backup.tar.gz")
+def network_diagnostics(): os.system("ping -c 3 google.com && ifconfig || ip a && netstat -tuln || ss -tuln")
+
+def main():
+    while True:
+        print("\\n===== DiskBuddy =====")
+        print("1.Check Disk Usage\n2.Top 15 Largest Files\n3.Clean APT Cache\n4.Remove Unused Packages & Old Kernels\n5.Empty Trash\n6.Clean Thumbnail Cache\n7.Clean Journal Logs\n8.System Summary\n9.Backup Home Directory\n10.Network Diagnostics\n11.Exit")
+        c=input("Choose 1-11: ")
+        if c=='1': check_disk_usage()
+        elif c=='2': show_top_largest_files()
+        elif c=='3': cleanup_apt_cache()
+        elif c=='4': remove_unused_packages()
+        elif c=='5': empty_trash()
+        elif c=='6': cleanup_thumbnails()
+        elif c=='7': cleanup_journal_logs()
+        elif c=='8': system_summary()
+        elif c=='9': backup_home()
+        elif c=='10': network_diagnostics()
+        elif c=='11': break
+        else: print("Invalid")
+if __name__=="__main__": main()

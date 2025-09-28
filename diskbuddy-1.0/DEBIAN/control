@@ -1,0 +1,8 @@
+Package: diskbuddy
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: all
+Maintainer: Your Name <you@example.com>
+Description: DiskBuddy - All-in-One Linux System Maintenance Tool
+Depends: python3, findutils, net-tools, nmap
