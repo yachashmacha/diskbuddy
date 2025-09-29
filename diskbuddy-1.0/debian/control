@@ -1,0 +1,12 @@
+Source: diskbuddy
+Section: utils
+Priority: optional
+Maintainer: Austin Welsh <austinwelsh110@gmail.com>
+Build-Depends: debhelper (>= 12), python3
+Standards-Version: 4.5.1
+
+Package: diskbuddy
+Architecture: all
+Depends: python3
+Description: DiskBuddy - simple disk management CLI tool
+ A command-line utility to manage and inspect disks easily.

@@ -1,0 +1,7 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: DiskBuddy
+Source: https://github.com/yachashmacha/diskbuddy
+
+Files: *
+Copyright: 2025 Austin Welsh
+License: MIT
